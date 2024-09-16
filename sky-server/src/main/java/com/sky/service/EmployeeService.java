@@ -10,14 +10,14 @@ public interface EmployeeService {
 
     /**
      * 员工登录
-     * @param employeeLoginDTO
-     * @return
+     * @param employeeLoginDTO 登录信息
+     * @return 员工信息
      */
     Employee login(EmployeeLoginDTO employeeLoginDTO);
 
     /**
      * 添加员工
-     * @param employeeDTO
+     * @param employeeDTO 员工信息
      */
     void addEmployee(EmployeeDTO employeeDTO);
 
@@ -34,4 +34,17 @@ public interface EmployeeService {
      * @param id 员工id
      */
     void enableOrDisableEmployee(Integer status, Long id);
+
+    /**
+     * 编辑员工信息
+     * @param employeeDTO 员工信息
+     */
+    void updateEmployee(EmployeeDTO employeeDTO);
+
+    /**
+     * 根据id查询员工
+     * @param id 员工id
+     * @return 员工信息
+     */
+    Employee getEmployeeById(Long id);
 }

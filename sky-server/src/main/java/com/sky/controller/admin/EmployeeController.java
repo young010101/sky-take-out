@@ -116,4 +116,32 @@ public class EmployeeController {
         employeeService.enableOrDisableEmployee(status, id);
         return Result.success();
     }
+
+    /**
+     * 根据id查询员工
+     *
+     * @param id the id of the employee
+     * @return Result
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工")
+    public Result<Employee> getEmployeeById(@PathVariable Long id) {
+        log.info("根据id查询员工：id={}", id);
+        Employee employee = employeeService.getEmployeeById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * 编辑员工信息
+     *
+     * @param employeeDTO the DTO containing the employee information
+     * @return Result
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result<Object> updateEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("编辑员工信息：{}", employeeDTO);
+        employeeService.updateEmployee(employeeDTO);
+        return Result.success();
+    }
 }
