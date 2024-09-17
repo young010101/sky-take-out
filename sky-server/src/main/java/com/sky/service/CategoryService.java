@@ -5,6 +5,8 @@ import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.result.PageResult;
 
+import java.util.List;
+
 public interface CategoryService {
     /**
      * Add a new category.
@@ -31,4 +33,11 @@ public interface CategoryService {
      * @param categoryDTO The category to update.
      */
     void update(CategoryDTO categoryDTO);
+
+    /**
+     * Query category list by type.
+     * @param type The category type.
+     * @return The category list.
+     */
+    List<Category> listByType(int type);
 }

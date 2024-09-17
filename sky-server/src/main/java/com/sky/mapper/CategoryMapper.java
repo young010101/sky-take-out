@@ -5,6 +5,9 @@ import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
@@ -29,4 +32,12 @@ public interface CategoryMapper {
      * @param category The category to update.
      */
     void update(Category category);
+
+    /**
+     * Query category list by type.
+     * @param type The category type.
+     * @return The category list.
+     */
+//    @Select("SELECT * FROM category WHERE type = #{type}")
+    List<Category> listByType(int type);
 }
