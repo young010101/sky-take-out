@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nonapi.io.github.classgraph.json.Id;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -15,6 +17,7 @@ public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
     private Long id;
 
     //类型: 1菜品分类 2套餐分类
