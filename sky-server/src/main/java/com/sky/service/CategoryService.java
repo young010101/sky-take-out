@@ -2,6 +2,7 @@ package com.sky.service;
 
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.entity.Category;
 import com.sky.result.PageResult;
 
 public interface CategoryService {
@@ -24,4 +25,10 @@ public interface CategoryService {
      * @param id The category id.
      */
     void enableOrDisable(int status, long id);
+
+    /**
+     * Update category.
+     * @param categoryDTO The category to update.
+     */
+    void update(CategoryDTO categoryDTO);
 }
