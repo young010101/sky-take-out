@@ -58,4 +58,19 @@ public class CategoryServiceImpl implements CategoryService {
         long total = categoryPage.getTotal();
         return new PageResult(total, categoryPage.getResult());
     }
+
+    /**
+     * Enable or disable category.
+     *
+     * @param status The status to set.
+     * @param id     The category id.
+     */
+    @Override
+    public void enableOrDisable(int status, long id) {
+        Category category = Category.builder()
+                .status(status)
+                .id(id)
+                .build();
+        categoryMapper.update(category);
+    }
 }

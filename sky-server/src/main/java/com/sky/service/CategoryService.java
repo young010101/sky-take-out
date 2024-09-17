@@ -17,4 +17,11 @@ public interface CategoryService {
      * @return The category list.
      */
     PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    /**
+     * Enable or disable category.
+     * @param status The status to set.
+     * @param id The category id.
+     */
+    void enableOrDisable(int status, long id);
 }

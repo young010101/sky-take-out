@@ -45,4 +45,16 @@ public class CategoryController {
         log.info("分页查询分类：{}", categoryPageQueryDTO);
         return Result.success(categoryService.pageQuery(categoryPageQueryDTO));
     }
+
+    /**
+     * Enable or disable category.
+     * @return The result.
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用或禁用分类")
+    public Result<?> enableOrDisable(@PathVariable int status, long id) {
+        log.info("启用或禁用分类：status={}, id={}", status, id);
+        categoryService.enableOrDisable(status, id);
+        return Result.success();
+    }
 }
