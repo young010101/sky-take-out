@@ -2,12 +2,16 @@ package com.sky.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.context.BaseContext;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
+import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.CategoryMapper;
+import com.sky.mapper.DishMapper;
+import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
 import org.springframework.beans.BeanUtils;
@@ -21,10 +25,14 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryMapper categoryMapper;
+    private final DishMapper dishMapper;
+    private final SetmealMapper setmealMapper;
 
     @Autowired
-    public CategoryServiceImpl(CategoryMapper categoryMapper) {
+    public CategoryServiceImpl(CategoryMapper categoryMapper, DishMapper dishMapper, SetmealMapper setmealMapper) {
         this.categoryMapper = categoryMapper;
+        this.dishMapper = dishMapper;
+        this.setmealMapper = setmealMapper;
     }
 
     /**
@@ -98,5 +106,23 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> listByType(int type) {
         return categoryMapper.listByType(type);
+    }
+
+    /**
+     * Delete category by id.
+     *
+     * @param id The category id.
+     */
+    @Override
+    public void deleteById(long id) {
+        if (dishMapper.countByCategoryId(id) > 0) {
+            throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_DISH);
+        }
+
+        if (setmealMapper.countByCategoryId(id) > 0) {
+            throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_SETMEAL);
+        }
+
+       categoryMapper.deleteById(id);
     }
 }

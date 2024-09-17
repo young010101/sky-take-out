@@ -40,4 +40,10 @@ public interface CategoryService {
      * @return The category list.
      */
     List<Category> listByType(int type);
+
+    /**
+     * Delete category by id.
+     * @param id The category id.
+     */
+    void deleteById(long id);
 }
